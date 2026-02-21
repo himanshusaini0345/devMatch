@@ -1,1 +1,25 @@
-http://localhost:3000
+GET http://localhost:3000/profiles?location=nyc   
+
+### 
+GET http://localhost:3000/profiles/1
+
+### 
+POST http://localhost:3000/profiles
+Content-Type: application/json
+
+{
+    "name": "John Doe",
+    "description": "A sample profile"
+}
+
+###
+PUT http://localhost:3000/profiles/12
+Content-Type: application/json
+
+{
+    "name": "John Doe u",
+    "description": "A sample pofile u"
+}
+
+###
+DELETE http://localhost:3000/profiles/22
