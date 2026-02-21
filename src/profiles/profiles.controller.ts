@@ -1,40 +1,55 @@
-import { Controller, Get, Query, Param, Post, Body, Put, Delete, HttpCode, HttpStatus } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  Post,
+  Body,
+  Put,
+  Delete,
+  HttpCode,
+  HttpStatus,
+} from '@nestjs/common';
 import { CreateProfileDto } from './dto/create-profile.dto';
-import {UpdateProfileDto} from './dto/update-profile.dto'
+import { UpdateProfileDto } from './dto/update-profile.dto';
+import { ProfilesService } from './profiles.service';
+import { type UUID } from 'node:crypto';
+
 @Controller('profiles')
 export class ProfilesController {
-    // GET /profiles
-    @Get()
-    findAll(@Query('location') location: string){
-        return [{location}];
-    }
+  constructor(private readonly profilesService: ProfilesService) {}
+  // GET /profiles
+  @Get()
+  findAll() {
+    return this.profilesService.findAll();
+  }
 
-    // GET /profiles/:id
-    @Get(':id')
-    findOne(@Param('id') id: string){
-        return {id};
-    }
+  // GET /profiles/:id
+  @Get(':id')
+  findOne(@Param('id') id: UUID) {
+    return this.profilesService.findOne(id);
+  }
 
-    // POST /profiles
-    @Post()
-    create(@Body() createProfileDto: CreateProfileDto){
-        return {
-            name:createProfileDto.name,
-            description: createProfileDto.description,
-        }
-    }
-    // PUT /profiles/:id
-    @Put(':id')
-    update(@Param('id') id: string,@Body() updateProfileDto: UpdateProfileDto){
-        return {
-            id,
-            ...updateProfileDto,
-        };
-    }
-    // DELETE /profiles/:id
-    @Delete(':id')
-    @HttpCode(HttpStatus.NO_CONTENT)
-    remove(@Param('id') id: string){
-        return;
-    }
+  // POST /profiles
+  @Post()
+  create(@Body() createProfileDto: CreateProfileDto) {
+    return this.profilesService.create(
+      createProfileDto.name,
+      createProfileDto.description,
+    );
+  }
+  // PUT /profiles/:id
+  @Put(':id')
+  update(@Param('id') id: UUID, @Body() updateProfileDto: UpdateProfileDto) {
+    return this.profilesService.update(
+        id,
+        updateProfileDto.name,
+        updateProfileDto.description,
+    )
+  }
+  // DELETE /profiles/:id
+  @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  remove(@Param('id') id: UUID) {
+    this.profilesService.remove(id);
+  }
 }
