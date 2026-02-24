@@ -8,8 +8,10 @@ import {
   Delete,
   HttpCode,
   HttpStatus,
-  ParseUUIDPipe,ValidationPipe
+  ParseUUIDPipe,
+  UseGuards
 } from '@nestjs/common';
+import {ProfilesGuard} from './profiles.guard'
 import { CreateProfileDto } from './dto/create-profile.dto';
 import { UpdateProfileDto } from './dto/update-profile.dto';
 import { ProfilesService } from './profiles.service';
@@ -50,6 +52,7 @@ export class ProfilesController {
   // DELETE /profiles/:id
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
+  @UseGuards(ProfilesGuard)
   remove(@Param('id', ParseUUIDPipe) id: UUID) {
     this.profilesService.remove(id);
   }
