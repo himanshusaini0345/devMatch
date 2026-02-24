@@ -1,7 +1,7 @@
 GET http://localhost:3000/profiles?location=nyc   
 
 ### 
-GET http://localhost:3000/profiles/08c4ee1f-e1f5-44e0-b1e8-874eaba1b930
+GET http://localhost:3000/profiles/4948488a-7d1f-4ea8-a8ce-8f0f7b8df4db
 
 ### 
 POST http://localhost:3000/profiles
@@ -22,4 +22,4 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/profiles/2e645643-ee91-4b90-a3fb-149ffd64f0e3
+DELETE http://localhost:3000/profiles/41ff31e1-c553-4fab-9e33-962787c35e27

@@ -1,8 +1,15 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { randomUUID, UUID } from 'node:crypto';
+
+type Profile = {
+  id: UUID;
+  name: string;
+  description: string;
+};
+
 @Injectable()
 export class ProfilesService {
-  private profiles = [
+  private profiles: Profile[] = [
     {
       id: randomUUID(),
       name: 'John Doe',
@@ -20,16 +27,20 @@ export class ProfilesService {
     },
   ];
 
-  findAll() {
+  findAll(): Profile[] {
     return this.profiles;
   }
 
-  findOne(id: UUID) {
-    return this.profiles.find((profile) => profile.id === id);
+  findOne(id: UUID): Profile {
+    const matchingProfile = this.profiles.find((profile) => profile.id === id);
+    if (!matchingProfile) {
+      throw new NotFoundException(`Profile with id: ${id} not found.`);
+    }
+    return matchingProfile;
   }
 
-  create(name: string, description: string) {
-    const newProfile = {
+  create(name: string, description: string): Profile {
+    const newProfile: Profile = {
       id: randomUUID(),
       name,
       description,
@@ -39,14 +50,14 @@ export class ProfilesService {
     return newProfile;
   }
 
-  update(id: UUID, name: string, description: string) {
+  update(id: UUID, name: string, description: string): Profile {
     const profileIndex = this.profiles.findIndex(
       (profile) => profile.id === id,
     );
     if (profileIndex === -1) {
-      return null;
+      throw new NotFoundException();
     }
-    const updatedProfile = {
+    const updatedProfile: Profile = {
       id,
       name,
       description,
@@ -55,7 +66,7 @@ export class ProfilesService {
     return updatedProfile;
   }
 
-  remove(id: UUID) {
+  remove(id: UUID): void {
     // this.profiles = this.profiles.filter(profile => profile.id !== id);
     const profileIndex = this.profiles.findIndex(
       (profile) => profile.id === id,
