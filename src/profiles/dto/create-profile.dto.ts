@@ -1,4 +1,4 @@
-export class CreateProfileDto{
-    name: string;
-    description: string;
+export class CreateProfileDto {
+  name: string;
+  description: string;
 }

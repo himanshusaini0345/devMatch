@@ -55,12 +55,14 @@ export class ProfilesService {
     return updatedProfile;
   }
 
-  remove(id:UUID){
+  remove(id: UUID) {
     // this.profiles = this.profiles.filter(profile => profile.id !== id);
-    const profileIndex = this.profiles.findIndex(profile => profile.id === id);
+    const profileIndex = this.profiles.findIndex(
+      (profile) => profile.id === id,
+    );
 
-    if(profileIndex > -1){
-        this.profiles.splice(profileIndex,1);
+    if (profileIndex > -1) {
+      this.profiles.splice(profileIndex, 1);
     }
   }
 }

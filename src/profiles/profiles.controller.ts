@@ -41,10 +41,10 @@ export class ProfilesController {
   @Put(':id')
   update(@Param('id') id: UUID, @Body() updateProfileDto: UpdateProfileDto) {
     return this.profilesService.update(
-        id,
-        updateProfileDto.name,
-        updateProfileDto.description,
-    )
+      id,
+      updateProfileDto.name,
+      updateProfileDto.description,
+    );
   }
   // DELETE /profiles/:id
   @Delete(':id')
