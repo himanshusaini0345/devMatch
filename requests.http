@@ -13,7 +13,7 @@ Content-Type: application/json
 }
 
 ###
-PUT http://localhost:3000/profiles/08c4ee1f-e1f5-44e0-b1e8-874eaba1b930
+PUT http://localhost:3000/profiles/12f4878b-fa68-427b-abfe-15240ea2740f
 Content-Type: application/json
 
 {
@@ -22,4 +22,4 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/profiles/312baa7f-65be-43f6-9bf9-14f6c23bb8e1
+DELETE http://localhost:3000/profiles/3759b58d-2335-4e1c-98d6-2ae07ffeef89
