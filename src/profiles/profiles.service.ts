@@ -51,29 +51,30 @@ export class ProfilesService {
   }
 
   update(id: UUID, name: string, description: string): Profile {
-    const profileIndex = this.profiles.findIndex(
+    const matchingProfileIndex = this.profiles.findIndex(
       (profile) => profile.id === id,
     );
-    if (profileIndex === -1) {
-      throw new NotFoundException();
+    if (matchingProfileIndex === -1) {
+      throw new NotFoundException(`Profile with id: ${id} not found.`);
     }
     const updatedProfile: Profile = {
       id,
       name,
       description,
     };
-    this.profiles[profileIndex] = updatedProfile;
+    this.profiles[matchingProfileIndex] = updatedProfile;
     return updatedProfile;
   }
 
   remove(id: UUID): void {
-    // this.profiles = this.profiles.filter(profile => profile.id !== id);
-    const profileIndex = this.profiles.findIndex(
+    const matchingProfileIndex = this.profiles.findIndex(
       (profile) => profile.id === id,
     );
 
-    if (profileIndex > -1) {
-      this.profiles.splice(profileIndex, 1);
+    if (matchingProfileIndex <= -1) {
+      throw new NotFoundException(`Profile with id: ${id} not found.`);
     }
+
+    this.profiles.splice(matchingProfileIndex, 1);
   }
 }

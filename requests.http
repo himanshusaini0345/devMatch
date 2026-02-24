@@ -22,4 +22,4 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/profiles/41ff31e1-c553-4fab-9e33-962787c35e27
+DELETE http://localhost:3000/profiles/312baa7f-65be-43f6-9bf9-14f6c23bb8e1
