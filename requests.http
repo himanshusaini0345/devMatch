@@ -8,7 +8,7 @@ POST http://localhost:3000/profiles
 Content-Type: application/json
 
 {
-    "name": "John Doe",
+    "name": "Jo",
     "description": "A sample profile"
 }
 
